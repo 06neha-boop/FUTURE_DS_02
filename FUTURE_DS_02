@@ -1,0 +1,32 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Data
+data = {
+    'Customer_ID': list(range(1,21)),
+    'Subscription_Months': [12,3,8,1,15,2,10,5,7,1,14,6,9,2,11,4,13,3,8,2],
+    'Monthly_Charges': [500,700,600,800,550,750,620,680,590,900,520,710,630,770,580,690,540,720,610,880],
+    'Churn': ['No','Yes','No','Yes','No','Yes','No','Yes','No','Yes',
+              'No','Yes','No','Yes','No','Yes','No','Yes','No','Yes']
+}
+
+df = pd.DataFrame(data)
+
+# Metrics
+total = len(df)
+churn = df[df['Churn']=='Yes'].shape[0]
+avg = df['Subscription_Months'].mean()
+
+print("Total Customers:", total)
+print("Churn Customers:", churn)
+
+# --------- GRAPHS ----------
+plt.figure(figsize=(10,5))
+
+# Graph 1 - Bar
+plt.subplot(1,2,1)
+counts = df['Churn'].value_counts()
+plt.bar(counts.index, counts.values)
+plt.title("Churn vs Retained")
+
+#
